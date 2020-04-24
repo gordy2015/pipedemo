@@ -1,0 +1,21 @@
+eapiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: jenkins-java-demo
+  namespace: pre
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jenkins-java-demo
+  template:
+    metadata:
+      labels:
+        app: jenkins-java-demo
+    spec:
+      containers:
+      - name: jenkins-java-demo
+        image: ${ORIGIN_REPO}/${REPO}:${IMAGE_TAG}
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
